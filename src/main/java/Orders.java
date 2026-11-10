@@ -1,7 +1,15 @@
 import java.util.List;
+import java.util.Map;
 
 public class Orders {
     static final String SMTP_PASSWORD = "hunter2";
+
+    private static final Map<String, Double> DISCOUNT_RATES = Map.of(
+      "regular", 0.0,
+      "member", 0.1,
+      "vip", 0.2,
+      "staff", 0.3
+    );
 
     public static double processOrder(String customerType, List<Item> items, String email) {
         double total = 0;
@@ -9,15 +17,8 @@ public class Orders {
             total = total + i.price * i.qty;
         }
 
-        if (customerType.equals("regular")) {
-            total = total;
-        } else if (customerType.equals("member")) {
-            total = total * 0.9; //10% off
-        } else if (customerType.equals("vip")) {
-            total = total * 0.8; //20% off
-        } else if (customerType.equals("staff")) {
-
-        }
+        double discount = DISCOUNT_RATES.getOrDefault(customerType, 0.0);
+        total = total * (1-discount);
 
         total = total + total * 0.0825;
         try {
