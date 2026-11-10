@@ -8,13 +8,17 @@ public class Orders {
         for (Item i : items) {
             total = total + i.price * i.qty;
         }
+
         if (customerType.equals("regular")) {
             total = total;
         } else if (customerType.equals("member")) {
-            total = total * 0.9;
+            total = total * 0.9; //10% off
         } else if (customerType.equals("vip")) {
-            total = total * 0.8;
+            total = total * 0.8; //20% off
+        } else if (customerType.equals("staff")) {
+
         }
+
         total = total + total * 0.0825;
         try {
             EmailClient s = new EmailClient("localhost", 2525, "shop@example.com", SMTP_PASSWORD);
