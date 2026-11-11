@@ -17,10 +17,14 @@ public class Orders {
             total = total + i.price * i.qty;
         }
 
+        // apply discount
         double discount = DISCOUNT_RATES.getOrDefault(customerType, 0.0);
         total = total * (1-discount);
 
-        total = total + total * 0.0825;
+        // apply tax
+        double tax = total * 0.0825;
+        total = total + tax;
+
         try {
             EmailClient s = new EmailClient("localhost", 2525, "shop@example.com", SMTP_PASSWORD);
             s.send(email, "Your total is " + total);
