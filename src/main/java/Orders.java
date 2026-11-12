@@ -4,6 +4,7 @@ import java.util.Map;
 public class Orders {
     static final String SMTP_PASSWORD = "hunter2";
 
+    static double STAFF_DISCOUNT_RATE = 0.3;
     private static final Map<String, Double> DISCOUNT_RATES = Map.of(
       "regular", 0.0,
       "member", 0.1,
